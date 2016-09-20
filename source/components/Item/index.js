@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, PropTyoes} from 'react';
 import $ from 'jquery';
+import './item.css';
 
 class Item extends Component {
 
@@ -8,12 +9,12 @@ class Item extends Component {
   }
 
   tag() {
-    return this.props.tag.map((t) => {
-      return <a href="{t.tu}">{t.tn}</a>;
+    return this.props.tag.map((t, i) => {
+      return <a key={i} href="{t.tu}">{t.tn}</a>;
     });
   }
 
-  rander() {
+  render() {
     return (
       <span>
         <a href="{this.props.url}">{this.props.title}</a>

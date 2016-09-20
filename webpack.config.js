@@ -1,6 +1,7 @@
 var webpack = require("webpack"),
   path = require('path'),
-  ROOT = path.resolve(__dirname) + "/"
+  ROOT = path.resolve(__dirname) + "/",
+  rucksack = require('rucksack-css'),
   // 提取WebPACK文本插件(如css,less,sass)
   ExtractTextPlugin = require("extract-text-webpack-plugin"),
   //代码压缩
@@ -9,9 +10,10 @@ var webpack = require("webpack"),
 module.exports = {
   context: ROOT,
   entry: {
-    main: ROOT + 'source/main.js',
-    item: ROOT + 'source/components/Item/index.js',
-    vendors: ['react', 'react-dom']
+    $main: ROOT + 'source/main.js',
+    item: ROOT + 'source/components/Item',
+    message: ROOT + 'source/components/Message',
+    vendors: ['react', 'react-dom', 'jquery']
   },
   output: {
     filename: "[name].build.js",
@@ -29,24 +31,20 @@ module.exports = {
       }
     },
     {
-      test: '/\.css$/',
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss-loader')
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
     }]
   },
   resolve: {
-    alias: {
-      'react': 'react/dist/react.min',
-      'react-dom': 'react-dom/dist/react-dom.min',
-    },
     extensions: ['', '.js', '.jsx'],
   },
   debug: true,
   devtool: "#source-map",
-  plugin: [
+  plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new ExtractTextPlugin("css/[name].css", {
       disable: false,
-      allChunks: true,
+      allChunks: false
     }),
   ],
 };

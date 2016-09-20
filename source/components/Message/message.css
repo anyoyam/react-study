@@ -1,0 +1,13 @@
+.message {
+  background-color: #fff;
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  box-shadow: 0 0 0 10px rgba(0,0,0,.5);
+  padding: 3px;
+}
+
+.message h1 {
+  margin: 0;
+  font-size: 1em;
+}
